@@ -1,0 +1,164 @@
+/*
+ * ============================================================
+ * DOCTOR DASHBOARD CSS
+ * ============================================================
+ * Styles for the doctor portal: patient records table,
+ * search bar, date filter, and prescription buttons.
+ */
+
+/*
+ * MAIN CONTENT — Doctor dashboard specific
+ */
+.main-content {
+    padding: 30px;
+    background: 
+        linear-gradient(rgba(232, 245, 243, 0.9), rgba(232, 245, 243, 0.9)),
+        url('../images/defineRole/index.png');
+    background-size: cover;
+}
+
+/*
+ * SEARCH AND FILTERS — Doctor's toolbar
+ * 
+ * Same layout as admin dashboard for consistency.
+ */
+.filter-wrapper {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* "Today's Appointments" button */
+.filter-btn {
+    padding: 10px 20px;
+    background-color: #015c5d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #017d7e;
+}
+
+/* Date input for selecting other dates */
+.date-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/*
+ * PATIENT RECORDS TABLE
+ * 
+ * A clean table showing: Patient ID, Name, Phone, Email, Prescription
+ * 
+ * border-collapse: collapse → Removes gaps between cells
+ * width: 100% → Full width of the container
+ */
+#patientTable {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Table header — dark background */
+#patientTable thead {
+    background-color: rgba(1, 92, 93, 0.9);
+    color: white;
+}
+
+#patientTable th {
+    padding: 15px;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* Table body rows */
+#patientTable tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+/* Alternating row colors (zebra striping) */
+#patientTable tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Row hover — highlights the row when mouse is over it */
+#patientTable tbody tr:hover {
+    background-color: #e8f5f3;
+}
+
+/* Table cells */
+#patientTable td {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/*
+ * PRESCRIPTION BUTTON — Click to view/add prescription
+ * 
+ * Small icon button in the Prescription column.
+ * Uses an image icon for visual clarity.
+ */
+.prescription-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.prescription-btn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.prescription-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+/*
+ * NO RECORDS MESSAGE
+ * 
+ * Shown when a doctor has no appointments.
+ * Italic, gray text to indicate "empty state".
+ */
+.noPatientRecord {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+/*
+ * RESPONSIVE — Mobile
+ */
+@media (max-width: 768px) {
+    #patientTable {
+        font-size: 0.8rem;
+    }
+
+    #patientTable th,
+    #patientTable td {
+        padding: 8px;
+    }
+
+    .filter-wrapper {
+        flex-direction: column;
+    }
+}

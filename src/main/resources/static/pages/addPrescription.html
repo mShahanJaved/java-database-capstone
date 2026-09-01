@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Prescription</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/addPrescription.css" />
+    <script src="../js/util.js" defer></script>
+    <script src="../js/render.js" defer></script>
+    <script src="../js/components/header.js" defer></script>
+    <script src="../js/components/footer.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div id="header"></div>
+
+            <main class="main-content">
+                <h2>Add <span>Prescription</span></h2>
+
+                <form id="prescriptionForm" class="prescription-form">
+                    <div class="form-group">
+                        <label>Patient Name</label>
+                        <input type="text" id="patientName" class="input-field" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Medicine Names</label>
+                        <input type="text" id="medication" class="input-field" placeholder="e.g., Paracetamol" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Dosage Instructions</label>
+                        <textarea id="dosage" class="input-field" placeholder="e.g., Twice a day" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Notes</label>
+                        <textarea id="doctorNotes" class="input-field" placeholder="Optional notes"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Save Prescription</button>
+                </form>
+            </main>
+
+            <div id="footer"></div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/addPrescription.js"></script>
+</body>
+</html>

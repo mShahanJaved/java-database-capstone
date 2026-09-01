@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!--
+        CSS FILES:
+        adminDashboard.css — Page-specific styles
+        style.css — Global styles (shared across all pages)
+    -->
+    <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+    <!--
+        JAVASCRIPT FILES:
+        render.js — Functions to create doctor cards dynamically
+        util.js — Helper functions (token, alerts, API calls)
+        header.js — Dynamic header (shows "Add Doctor" button)
+        footer.js — Dynamic footer
+    -->
+    <script th:src="@{/js/render.js}" defer></script>
+    <script th:src="@{/js/util.js}" defer></script>
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script th:src="@{/js/components/footer.js}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <!--
+                HEADER PLACEHOLDER:
+                header.js injects: Logo + "Add Doctor" button + Logout
+            -->
+            <div id="header"></div>
+
+            <!--
+                MAIN CONTENT — Admin Dashboard
+                Contains:
+                1. Search bar — Filter doctors by name
+                2. Filter dropdowns — By time (AM/PM) and specialty
+                3. Content area — Doctor cards are injected here by JS
+            -->
+            <main class="main-content">
+                <h2>Doctor <span>List</span></h2>
+
+                <!-- Search and Filter Toolbar -->
+                <div class="filter-wrapper">
+                    <input type="text" id="searchBar" placeholder="Search by doctor name" />
+                    <select class="select-dropdown" id="filterTime">
+                        <option value="">Filter by Time</option>
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                    <select class="select-dropdown" id="filterSpecialty">
+                        <option value="">Filter by Specialty</option>
+                        <option value="Cardiologist">Cardiologist</option>
+                        <option value="Neurologist">Neurologist</option>
+                        <option value="Orthopedist">Orthopedist</option>
+                        <option value="Pediatrician">Pediatrician</option>
+                        <option value="Dermatologist">Dermatologist</option>
+                    </select>
+                </div>
+
+                <!--
+                    CONTENT AREA:
+                    Doctor cards are dynamically injected here by adminDashboard.js
+                    Each card shows: name, specialty, email, availability, delete button
+                -->
+                <div id="content"></div>
+            </main>
+
+            <div id="footer"></div>
+        </div>
+    </div>
+
+    <!--
+        MODAL — Used for "Add Doctor" form
+        header.js handles showing/hiding this modal
+    -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!--
+        PAGE-SPECIFIC JAVASCRIPT:
+        adminDashboard.js — Handles loading doctors, search, filters
+        doctorCard.js — Component for creating individual doctor cards
+    -->
+    <script type="module" th:src="@{/js/adminDashboard.js}"></script>
+    <script type="module" th:src="@{/js/components/doctorCard.js}"></script>
+</body>
+</html>

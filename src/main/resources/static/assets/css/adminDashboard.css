@@ -1,0 +1,192 @@
+/*
+ * ============================================================
+ * ADMIN DASHBOARD CSS
+ * ============================================================
+ * Styles for the admin portal: doctor cards, search bar,
+ * filters, add doctor button, and modal form.
+ */
+
+/*
+ * MAIN CONTENT — Admin dashboard specific
+ * 
+ * justify-content: flex-start → Content starts from the top
+ * (not centered like the landing page)
+ */
+.main-content {
+    padding: 30px;
+    background: 
+        linear-gradient(rgba(232, 245, 243, 0.9), rgba(232, 245, 243, 0.9)),
+        url('../images/defineRole/index.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/*
+ * SEARCH AND FILTERS — Top toolbar
+ * 
+ * Flexbox row: search bar + filter dropdowns side by side.
+ * flex-wrap: wrap → On mobile, filters stack below the search bar.
+ */
+.filter-wrapper {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/*
+ * ADD DOCTOR BUTTON — Admin-only button in the header
+ * 
+ * This button appears in the header when role is "admin".
+ * Green background to match the medical theme.
+ */
+.adminBtn {
+    background-color: #015c5d;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.adminBtn:hover {
+    background-color: #014a4b;
+    transform: translateY(-1px);
+}
+
+/*
+ * DOCTOR CARDS GRID
+ * 
+ * display: grid → CSS Grid layout (perfect for card grids)
+ * grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+ *   → Automatically creates as many columns as fit
+ *   → Each card is at least 300px wide
+ *   → Cards stretch to fill available space
+ * gap: 20px → Space between cards
+ */
+#content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/*
+ * INDIVIDUAL DOCTOR CARD
+ * 
+ * White card with rounded corners and subtle shadow.
+ * On hover: slight lift effect for interactivity feedback.
+ */
+.doctor-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.doctor-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Doctor name in the card */
+.doctor-card h3 {
+    color: #015c5d;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Doctor info text (specialty, email, availability) */
+.doctor-info p {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+/* Action buttons at the bottom of the card */
+.card-actions {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+}
+
+.card-actions button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* Delete button — red */
+.card-actions .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.card-actions .delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Book Now button — teal */
+.card-actions .book-btn {
+    background-color: #015c5d;
+    color: white;
+}
+
+.card-actions .book-btn:hover {
+    background-color: #014a4b;
+}
+
+/*
+ * ADD DOCTOR MODAL FORM
+ * 
+ * The form that appears when admin clicks "Add Doctor".
+ * Clean, centered layout with labeled fields.
+ */
+.modal-form {
+    padding: 10px 0;
+}
+
+.modal-form h3 {
+    color: #015c5d;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.modal-form .form-group {
+    margin-bottom: 12px;
+}
+
+.modal-form label {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+/*
+ * RESPONSIVE — Mobile
+ */
+@media (max-width: 768px) {
+    .filter-wrapper {
+        flex-direction: column;
+    }
+
+    #content {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital CMS</title>
+    <link rel="icon" href="./assets/images/logo/logo.png" type="image/png">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- Scripts loaded as modules to support ES6 export syntax -->
+    <script type="module" src="./js/components/header.js"></script>
+    <script type="module" src="./js/components/footer.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div id="header"></div>
+
+            <main class="main-content">
+                <h2>Select Your <span>Role</span></h2>
+
+                <div class="role-buttons">
+                    <!--
+                        COURSE FORMAT:
+                        Buttons have specific IDs that index.js expects:
+                        - adminLogin → triggers admin login modal
+                        - doctorLogin → triggers doctor login modal
+                        - patientBtn → redirects to patient dashboard
+                    -->
+                    <button id="adminLogin" class="role-btn">Admin</button>
+                    <button id="patientBtn" class="role-btn" onclick="window.location.href='./pages/patientDashboard.html'">Patient</button>
+                    <button id="doctorLogin" class="role-btn">Doctor</button>
+                </div>
+            </main>
+
+            <div id="footer"></div>
+        </div>
+    </div>
+
+    <!--
+        MODAL — Login popups appear here
+        index.js handles showing the right form based on which button was clicked
+    -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!--
+        index.js — Handles admin/doctor login flow
+        modals.js — Creates the login form HTML
+    -->
+    <script type="module" src="./js/services/index.js"></script>
+</body>
+</html>

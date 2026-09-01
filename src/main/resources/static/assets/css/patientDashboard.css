@@ -1,0 +1,178 @@
+/*
+ * ============================================================
+ * PATIENT DASHBOARD CSS
+ * ============================================================
+ * Styles for the patient portal: doctor cards with "Book Now",
+ * booking modal, search/filter toolbar.
+ */
+
+/*
+ * FILTER WRAPPER — AM/PM and Specialty filters
+ * 
+ * Same layout as admin/doctor dashboards for consistency.
+ */
+.filter-wrapper {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/*
+ * BOOK NOW BUTTON — On each doctor card
+ * 
+ * Full-width button at the bottom of each card.
+ * Dark teal background, white text.
+ * On hover: slightly darker background.
+ */
+.card-actions {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.card-actions .book-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #015c5d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.card-actions .book-btn:hover {
+    background-color: #014a4b;
+    transform: translateY(-1px);
+}
+
+/*
+ * BOOKING MODAL — Slides up from the bottom
+ * 
+ * When a patient clicks "Book Now", this modal appears.
+ * It shows available dates and time slots for the selected doctor.
+ * 
+ * .modalApp → The container (fixed position, slides up)
+ * .active → Toggles the slide-in animation
+ */
+.modalApp {
+    position: fixed;
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    padding: 30px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+    transition: bottom 0.4s ease;
+    z-index: 1001;
+}
+
+/* When .active is added, the modal slides up into view */
+.modalApp.active {
+    bottom: 0;
+}
+
+/*
+ * BOOKING FORM FIELDS
+ * 
+ * Clean, centered form with labeled inputs.
+ * Same style as the login modal for consistency.
+ */
+.modalApp h3 {
+    color: #015c5d;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modalApp .form-group {
+    margin-bottom: 15px;
+}
+
+.modalApp label {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.modalApp select,
+.modalApp input {
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/*
+ * CONFIRM BOOKING BUTTON
+ * 
+ * Dark teal, full width, centered.
+ * On hover: brighter with subtle lift.
+ */
+.confirmBookingBtn {
+    width: 90%;
+    margin: 15px auto 0;
+    display: block;
+    padding: 12px;
+    background-color: #015c5d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.confirmBookingBtn:hover {
+    background-color: #014a4b;
+    filter: brightness(1.1);
+}
+
+/*
+ * RIPPLE EFFECT — Visual feedback when booking is confirmed
+ * 
+ * A circular animation that expands outward.
+ * Fixed position so it appears anywhere on screen.
+ */
+.ripple-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(1, 92, 93, 0.3);
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple 0.6s ease-out;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes ripple {
+    to {
+        transform: translate(-50%, -50%) scale(10);
+        opacity: 0;
+    }
+}
+
+/*
+ * RESPONSIVE — Mobile
+ */
+@media (max-width: 768px) {
+    .modalApp {
+        width: 100%;
+        border-radius: 0;
+    }
+}

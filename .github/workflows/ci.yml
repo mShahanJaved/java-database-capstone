@@ -1,0 +1,81 @@
+# ============================================================
+# GITHUB ACTIONS CI — Continuous Integration
+# ============================================================
+# WHAT IS CI?
+# Every time you push code to GitHub, this workflow runs AUTOMATICALLY.
+# It:
+# 1. Compiles the Java code (catches syntax errors)
+# 2. Runs unit tests (catches bugs)
+# 3. Builds the Docker image (ensures it can be containerized)
+# 
+# WHY USE CI?
+# 1. Catch errors EARLY — before they reach production
+# 2. Automated quality checks — no manual testing needed
+# 3. Confidence — know your code works before deploying
+# 
+# HOW TO USE:
+# Just push to GitHub! This workflow runs automatically.
+# You can also trigger it manually from the Actions tab.
+
+# Name of the workflow (shown in GitHub Actions tab)
+name: Java CI Build
+
+# When should this workflow run?
+# on.push → Every time code is pushed to main/master branch
+# on.pull_request → Every time a pull request is created/updated
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+# Jobs — What the workflow does
+jobs:
+  build:
+    # Run on the latest Ubuntu server
+    runs-on: ubuntu-latest
+
+    # Steps — Individual tasks in the job
+    steps:
+      # Step 1: Download the code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Java 17
+      # actions/setup-java → Installs Java on the server
+      # java-version: 17 → We need Java 17 (matches our pom.xml)
+      # distribution: temurin → Eclipse Temurin (reliable OpenJDK distribution)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+          # cache: 'maven' → Caches Maven dependencies
+          # This speeds up subsequent runs by ~50%
+
+      # Step 3: Compile and test
+      # mvn compile → Compiles Java code (catches syntax errors)
+      # mvn test → Runs unit tests (catches bugs)
+      # --batch-mode → Non-interactive (no prompts)
+      # -Dstyle.color=never → No colored output in logs
+      - name: Build with Maven
+        run: mvn compile test --batch-mode -Dstyle.color=never
+
+      # Step 4: Package the application
+      # mvn package → Creates the .jar file
+      # -DskipTests → Skip tests (already ran in Step 3)
+      - name: Package
+        run: mvn package -DskipTests --batch-mode
+
+      # Step 5: Build Docker image
+      # docker build → Creates a Docker image from our Dockerfile
+      # -t smart-clinic → Tags the image with name "smart-clinic"
+      - name: Build Docker image
+        run: docker build -t smart-clinic .
+
+      # Step 6: Run linting (optional but recommended)
+      # Checks code style and formatting
+      # This step is optional — remove if you don't have a linter configured
+      # - name: Lint
+      #   run: mvn checkstyle:check || true

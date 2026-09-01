@@ -1,0 +1,81 @@
+/*
+ * ============================================================
+ * INDEX.CSS — Landing Page Styles
+ * ============================================================
+ * This file contains styles ONLY for index.html (the role selection page).
+ * Page-specific styles keep the code organized and prevent conflicts.
+ */
+
+/*
+ * ROLE BUTTONS CONTAINER
+ * 
+ * display: flex → Horizontal layout
+ * flex-direction: column → Stack buttons vertically
+ * gap: 15px → Space between buttons
+ * align-items: center → Center buttons horizontally
+ */
+.role-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/*
+ * ROLE BUTTONS — Individual button styling
+ * 
+ * These override the base .button styles in style.css.
+ * width: 250px → Fixed width for consistent look
+ * font-size: 1.1rem → Slightly larger text for readability
+ */
+.role-btn {
+    width: 250px;
+    font-size: 1.1rem;
+}
+
+/*
+ * MODAL FORM STYLES
+ * 
+ * The login modal that appears when a role is selected.
+ * These styles make the form look clean and professional.
+ */
+
+/* Form container inside the modal */
+.modal-form {
+    text-align: center;
+}
+
+/* Form title — "Admin Login", "Doctor Login", etc. */
+.modal-form h3 {
+    color: #015c5d;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Label for form fields */
+.modal-form label {
+    display: block;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* Error message shown when login fails */
+.error-message {
+    color: #c0392b;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+    /* Hidden by default, shown by JavaScript when needed */
+}
+
+/*
+ * RESPONSIVE — Mobile adjustments
+ */
+@media (max-width: 768px) {
+    .role-btn {
+        width: 200px;
+    }
+}

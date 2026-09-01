@@ -1,0 +1,384 @@
+/*
+ * ============================================================
+ * STYLE.CSS — Global Styles
+ * ============================================================
+ * This file contains styles that are SHARED across all pages.
+ * Think of it as the "design system" — buttons, colors, fonts,
+ * layout rules that every page uses.
+ * 
+ * WHY separate global from page-specific?
+ * 1. DRY (Don't Repeat Yourself) — write once, use everywhere
+ * 2. Consistency — all buttons look the same
+ * 3. Easy maintenance — change one color, it updates everywhere
+ */
+
+/* ============================================================
+   CSS RESET — Remove browser defaults
+   ============================================================
+   Every browser has slightly different default styles.
+   This reset makes everything CONSISTENT across browsers.
+   
+   margin: 0 → Remove default margins
+   padding: 0 → Remove default padding
+   box-sizing: border-box → Width includes padding + border
+     Without this: width=200px + padding=20px = 240px total (unexpected!)
+     With this: width=200px includes the padding (expected!)
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+ * BASE STYLES — Applied to the entire page
+ * 
+ * Roboto font — Clean, modern, Google's recommended font.
+ * height: 100% — Makes the page fill the full viewport.
+ */
+html, body {
+    height: 100%;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #e8f5f3;
+}
+
+/*
+ * LAYOUT — Flexbox column that fills the viewport
+ * 
+ * .wrapper is used on EVERY page as the main container.
+ * display: flex → Enables flexbox layout
+ * flex-direction: column → Stack children vertically
+ * min-height: 100vh → At least as tall as the viewport
+ */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/*
+ * MAIN CONTENT — Grows to fill available space
+ * 
+ * flex: 1 → Takes up ALL remaining space after header/footer.
+ * This ensures the footer stays at the bottom even on short pages.
+ * 
+ * background: Medical-themed gradient with an image overlay.
+ * background-size: cover → Image fills the entire area
+ * background-attachment: fixed → Image doesn't scroll with content
+ */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    background: 
+        linear-gradient(rgba(232, 245, 243, 0.85), rgba(232, 245, 243, 0.85)),
+        url('../images/defineRole/index.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/*
+ * HEADINGS — Consistent typography
+ * 
+ * Color: #015c5d (dark teal) — The primary brand color.
+ * The span with class "highlight" uses #c0392b (red) for emphasis.
+ * Example: "Select Your **Role**" where "Role" is red.
+ */
+h2 {
+    font-size: 2.5rem;
+    color: #015c5d;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+h2 .highlight,
+h2 span {
+    color: #c0392b;
+}
+
+/*
+ * BUTTONS — Consistent button styling
+ * 
+ * All buttons share these base styles.
+ * Page-specific classes (like .role-btn, .adminBtn) add extra styles.
+ */
+.button, .role-btn, .adminBtn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* transition = smooth animation when hovering */
+}
+
+/*
+ * ROLE BUTTONS — The Admin/Patient/Doctor buttons
+ * 
+ * Dark teal background (#015c5d) with white text.
+ * On hover: slightly darker (#014a4b) with a subtle lift (translateY).
+ * The translate(-2px) lifts the button UP 2 pixels on hover.
+ */
+.role-btn {
+    background-color: #015c5d;
+    color: white;
+    width: 250px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.role-btn:hover {
+    background-color: #014a4b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/*
+ * MODAL — Login popup
+ * 
+ * display: none → Hidden by default
+ * position: fixed → Stays in place even when scrolling
+ * z-index: 1000 → Sits ON TOP of everything else
+ * 
+ * The overlay (rgba(0,0,0,0.5)) creates a dark background
+ * behind the modal, focusing attention on the login form.
+ */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/*
+ * MODAL CONTENT — The actual login form box
+ * 
+ * White background, rounded corners, shadow for depth.
+ * max-width: 400px → Prevents the form from being too wide
+ * 
+ * When .modal has display: flex, this content is centered.
+ */
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/*
+ * CLOSE BUTTON — The X in the top-right corner of the modal
+ * 
+ * position: absolute → Positioned relative to .modal-content
+ * top: 10px, right: 15px → Top-right corner
+ * font-size: 1.5rem → Large enough to click easily
+ */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/*
+ * FORM INPUTS — Text fields in login/register forms
+ * 
+ * width: 100% → Full width of the container
+ * padding: 12px → Comfortable click/tap area
+ * border: 1px solid #ddd → Subtle border
+ * border-radius: 8px → Rounded corners
+ * 
+ * :focus → When the user clicks into the field
+ * border-color: #015c5d → Teal border highlights the active field
+ */
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-field:focus {
+    border-color: #015c5d;
+}
+
+/*
+ * SUBMIT BUTTON — Login/Register button inside the modal
+ * 
+ * Full width, dark teal, white text.
+ * On hover: slightly darker with a lift effect.
+ */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #015c5d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #014a4b;
+    transform: translateY(-1px);
+}
+
+/*
+ * HEADER — Top navigation bar
+ * 
+ * Dark teal background with white text.
+ * Flexbox for horizontal layout (logo + nav items).
+ */
+.header {
+    background-color: #015c5d;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.header .nav-items {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header .nav-items a,
+.header .nav-items button {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/*
+ * FOOTER — Bottom section
+ * 
+ * Dark background with 3 columns: Company, Support, Legals.
+ * Flexbox for the column layout.
+ */
+.footer {
+    background-color: #1a1a2e;
+    color: #ccc;
+    padding: 40px 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-column h4 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.footer-column a {
+    display: block;
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.footer-column a:hover {
+    color: white;
+}
+
+/*
+ * SELECT DROPDOWN — Filter dropdowns
+ * 
+ * Used in admin/doctor/patient dashboards for filtering.
+ * Styled to match the teal theme.
+ */
+.select-dropdown {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+.select-dropdown:focus {
+    border-color: #015c5d;
+}
+
+/*
+ * SEARCH BAR — Used across dashboards
+ * 
+ * Full width on mobile, fixed width on desktop.
+ * Teal border on focus for visual feedback.
+ */
+.searchBar, #searchBar {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.searchBar:focus, #searchBar:focus {
+    border-color: #015c5d;
+}
+
+/*
+ * RESPONSIVE DESIGN — Mobile-friendly
+ * 
+ * @media queries adjust styles for smaller screens.
+ * max-width: 768px → Applies to tablets and phones.
+ */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .role-btn {
+        width: 200px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

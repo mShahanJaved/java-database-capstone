@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+
+    <!--
+        CSS FILES:
+        doctorDashboard.css — Page-specific styles
+        adminDashboard.css — Shared admin/doctor styles (cards, filters)
+        style.css — Global styles
+    -->
+    <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/doctorDashboard.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+    <!--
+        JAVASCRIPT FILES:
+        render.js — Functions to create patient rows dynamically
+        util.js — Helper functions
+        header.js — Dynamic header (shows "Home" + Logout)
+        footer.js — Dynamic footer
+        patientRows.js — Component for patient table rows
+    -->
+    <script th:src="@{/js/render.js}" defer></script>
+    <script th:src="@{/js/util.js}" defer></script>
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script th:src="@{/js/components/footer.js}" defer></script>
+    <script th:src="@{/js/components/patientRows.js}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <!-- HEADER — "Home" + Logout -->
+            <div id="header"></div>
+
+            <!--
+                MAIN CONTENT — Doctor Dashboard
+                Contains:
+                1. Search bar — Filter appointments by patient name
+                2. Filter buttons — "Today's Appointments" + date picker
+                3. Patient records table — Shows all appointments
+            -->
+            <main class="main-content">
+                <h2>Patient <span>Records</span></h2>
+
+                <!-- Search and Filter Toolbar -->
+                <div class="filter-wrapper">
+                    <input type="text" id="searchBar" placeholder="Search by patient name" />
+                    <button class="filter-btn" id="todayBtn">Today's Appointments</button>
+                    <input type="date" class="date-input" id="dateFilter" />
+                </div>
+
+                <!--
+                    PATIENT RECORDS TABLE:
+                    Dynamically populated by doctorDashboard.js
+                    Columns: Patient ID, Name, Phone, Email, Prescription
+                -->
+                <table id="patientTable">
+                    <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Prescription</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patientTableBody">
+                        <!-- Rows injected by doctorDashboard.js -->
+                    </tbody>
+                </table>
+            </main>
+
+            <div id="footer"></div>
+        </div>
+    </div>
+
+    <!--
+        MODAL — Used for viewing/adding prescriptions
+    -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!--
+        PAGE-SPECIFIC JAVASCRIPT:
+        doctorDashboard.js — Handles loading appointments, search, filters
+        patientServices.js — API calls for patient data
+    -->
+    <script type="module" th:src="@{/js/doctorDashboard.js}"></script>
+    <script type="module" th:src="@{/js/services/patientServices.js}"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Build output
+target/
+*.class
+*.jar
+*.war
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Freebuff internal
+.freebuff/
+
+# Logs
+*.log
+*.log.err
